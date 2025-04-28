@@ -10,9 +10,6 @@ los servicios utilizados en una biblioteca.
    - Crear entorno virtual `python3 -m venv env`.
    - Activar entorno virtual `source env/bin/activate`.
 3. Instala los paquetes requeridos `pip install -r requirements.txt`.
-4. Instala las dependencias:
-   1. `pip install --upgrade pip`.
-   2. `pip install django`.
 5. Corre las migraciones de la base de datos con el comando `python manage.py migrate`.
 6. Crea un usuario para iniciar sesion con el comando `python manage.py createsuperuser`.
 5. Finalmente ejecuta el servidor con el comando `python manage.py runserver`.
