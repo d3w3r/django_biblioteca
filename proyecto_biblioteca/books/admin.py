@@ -4,18 +4,23 @@ from .models import Libro, Autor, Resena
 # Register your models here.
 @admin.register(Autor)
 class AutorAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'nacionalidad', "book_count")
+    list_display = ('nombre', 'nacionalidad', "numero_libros",)
     search_fields = ('nacionalidad', 'nombre')
 
-    def book_count(self, obj):
+    def numero_libros(self, obj):
         return obj.libros.count()
 
 @admin.register(Libro)
 class LibroAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'autor', 'fecha_publicacion', 'resumen')
+    list_display = ('titulo', 'autor', 'fecha_publicacion', 'resumen', "numero_resenas")
     search_fields = ('autor',)
     list_filter = ('autor',)
+
+    def numero_resenas(self, obj):
+        return obj.resenas.count()
 
 @admin.register(Resena)
 class ResenaAdmin(admin.ModelAdmin):
     list_display = ('libro', 'texto', 'calificacion', 'fecha')
+    search_fields = ('texto', 'calificacion')
+    list_filter = ('libro',)
