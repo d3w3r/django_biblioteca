@@ -9,7 +9,13 @@ class Autor(models.Model):
     def __str__(self):
         return self.nombre
 
+class LibroManager(models.Manager):
+    def colombianos(self):
+        return self.filter(autor__nacionalidad__icontains="colombia")
+
 class Libro(models.Model):
+    objects = LibroManager()
+
     titulo = models.CharField(max_length=100)
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE, related_name='libros')
     fecha_publicacion = models.DateField()
