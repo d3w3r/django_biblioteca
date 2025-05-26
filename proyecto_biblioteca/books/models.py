@@ -1,9 +1,10 @@
 from django.db import models
 from datetime import timedelta
 from django.utils import timezone
+from .validators import autor_validator, libro_validator
 
 class Autor(models.Model):
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100, validators=[autor_validator])
     nacionalidad = models.CharField(max_length=100)
 
     def __str__(self):
@@ -19,7 +20,7 @@ class Libro(models.Model):
     titulo = models.CharField(max_length=100)
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE, related_name='libros')
     fecha_publicacion = models.DateField()
-    resumen = models.TextField()
+    resumen = models.TextField(validators=[libro_validator])
 
     def was_published_recently(self):
         return self.fecha_publicacion >= timezone.now() - timedelta(days=1)
